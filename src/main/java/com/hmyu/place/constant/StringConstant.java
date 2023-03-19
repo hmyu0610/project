@@ -11,6 +11,7 @@ public class StringConstant {
 	// Globals 변수
 	public static final String KAKAO_DOMAIN = "Globals.kakao.domain";
 	public static final String KAKAO_KEY = "Globals.kakao.key";
+	public static final String KAKAO_KEY_TYPE = "Globals.kakao.key.type";
 
 	public static final String NAVER_DOMAIN = "Globals.naver.domain";
 	public static final String NAVER_CLIENT_ID = "Globals.naver.client.id";

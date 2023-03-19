@@ -20,15 +20,18 @@ public enum MessageConstant {
     TIMEOUT("9000", "타임아웃 발생하였습니다."),
 
     // 요청 권한 오류
-    NO_PERMISSION("1000", "사용 권한이 없습니다."),
-    INVALID_PERMISSION("1001", "사용권한 정보가 올바르지 않습니다."),
+    NO_PERMISSION("0001", "사용 권한이 없습니다."),
+    INVALID_PERMISSION("0002", "사용권한 정보가 올바르지 않습니다."),
 
     // 공통
-    INVALID_PARAMETER("0001", "필수 입력 파라미터가 누락되었습니다."),
-    INSERT_ERROR("0002", "저장 중 오류가 발생했습니다."),
-    SELECT_ERROR("0003", "조회 중 오류가 발생했습니다."),
-    NOT_EXISTS_DATA("0004", "조회된 데이터가 없습니다."),
-    EXISTS_DATA("0005", "기존 데이터가 존재합니다."),
+    INVALID_PARAMETER("1000", "필수 입력 파라미터가 누락되었습니다."),
+    INSERT_ERROR("1001", "저장 중 오류가 발생했습니다."),
+    SELECT_ERROR("1002", "조회 중 오류가 발생했습니다."),
+    NOT_EXISTS_DATA("1003", "조회된 데이터가 없습니다."),
+    EXISTS_DATA("1005", "기존 데이터가 존재합니다."),
+
+    // 통신 오류
+    INTERNAL_HTTP_CONNECT_ERROR("2000", "내부 요청 처리 중 통신 오류가 발생했습니다."),
 
     ;
 
