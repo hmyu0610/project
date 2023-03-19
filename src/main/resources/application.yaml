@@ -1,2 +1,37 @@
 server:
   port: 8080
+
+spring:
+  profiles:
+    group:
+      "local" : "localDb"
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "localDb"
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+      path: /h2-console
+    sql:
+      init:
+        mode: always
+        schema-locations: classpath:h2/schema.sql
+        data-locations: classpath:h2/data.sql
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:~/test
+    username: sa
+    password:
