@@ -1,5 +1,6 @@
 package com.hmyu.place.controller;
 
+import com.hmyu.place.aop.TokenCheck;
 import com.hmyu.place.service.SearchService;
 import com.hmyu.place.vo.ResponseVo;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +22,9 @@ public class SearchController {
     /**
      * Desc : 장소 검색
      */
+    @TokenCheck
     @GetMapping("/place")
-    public ResponseEntity<ResponseVo> getSearchPlace(@RequestParam String keyword) {
+    public ResponseEntity<ResponseVo> getSearchPlace(@RequestParam String keyword) throws Exception{
         ResponseVo resVo = searchService.getSearchPlace(keyword);
         return ResponseEntity.ok(resVo);
     }
@@ -30,8 +32,9 @@ public class SearchController {
     /**
      * Desc : 검색 키워드 목록
      */
+    @TokenCheck
     @GetMapping("/keyword")
-    public ResponseEntity<ResponseVo> getSearchKeyword() {
+    public ResponseEntity<ResponseVo> getSearchKeyword() throws Exception{
         ResponseVo resVo = searchService.getSearchKeyword();
         return ResponseEntity.ok(resVo);
     }
