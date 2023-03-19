@@ -9,11 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.server.MethodNotAllowedException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 /**
@@ -40,11 +37,20 @@ public class ExceptionControllerAdvice {
         return resVo;
 	}
 
-	@ExceptionHandler(MethodNotAllowedException.class)
+	@ExceptionHandler(MissingServletRequestParameterException.class)
+	@ResponseStatus(value = HttpStatus.OK)
+	@RequestMapping(produces = HttpConstant.APPLICATION_JSON_UTF8)
+	public ResponseVo missingParamHandler(MissingServletRequestParameterException e) {
+		logger.error("[missingParamHandler] " + e, e.getParameterName());
+		ResponseVo resVo = new ResponseVo(MessageConstant.INVALID_PARAMETER, e.getParameterName());
+		return resVo;
+	}
+
+	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
 	@ResponseStatus(value = HttpStatus.METHOD_NOT_ALLOWED)
 	@RequestMapping(produces = HttpConstant.APPLICATION_JSON_UTF8)
-	public ResponseVo handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException e) {
-		logger.error("[handleHttpRequestMethodNotSupported] " + e, e);
+	public ResponseVo methodNotSupportedHandler(HttpRequestMethodNotSupportedException e) {
+		logger.error("[methodNotSupportedHandler] " + e);
 		ResponseVo resVo = new ResponseVo(MessageConstant.METHOD_NOT_ALLOWED);
 		return resVo;
 	}
@@ -52,8 +58,8 @@ public class ExceptionControllerAdvice {
 	@ExceptionHandler(NoHandlerFoundException.class)
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
 	@RequestMapping(produces = HttpConstant.APPLICATION_JSON_UTF8)
-	public ResponseVo handleNoHandlerFoundException(NoHandlerFoundException e) {
-		logger.error("[handleHttpRequestMethodNotSupported] " + e, e);
+	public ResponseVo notFoundHandler(NoHandlerFoundException e) {
+		logger.error("[notFoundHandler] " + e);
 		ResponseVo resVo = new ResponseVo(MessageConstant.NOT_FOUND);
 		return resVo;
 	}
