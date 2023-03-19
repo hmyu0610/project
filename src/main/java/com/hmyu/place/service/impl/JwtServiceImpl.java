@@ -1,7 +1,6 @@
 package com.hmyu.place.service.impl;
 
 import com.hmyu.place.constant.HttpConstant;
-import com.hmyu.place.exception.InvalidTokenException;
 import com.hmyu.place.exception.UnauthorizedException;
 import com.hmyu.place.service.JwtService;
 import io.jsonwebtoken.Claims;
@@ -45,21 +44,27 @@ public class JwtServiceImpl implements JwtService {
     }
 
     /**
+     * Desc : Claims 파싱
+     */
+    public Jws<Claims> parseClaims(String token) throws UnauthorizedException {
+        Jws<Claims> claims = null;
+        try {
+            claims = Jwts.parser()
+                    .setSigningKey(this.generateKey())
+                    .parseClaimsJws(token);
+        } catch (Exception e) {
+            throw new UnauthorizedException();
+        }
+        return claims;
+    }
+
+    /**
      * Desc : 토큰 정보 가져오기
      */
     public HashMap<String, Object> getClaim(String key) throws UnauthorizedException {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         String jwt = request.getHeader(HttpConstant.AUTHORIZATION);
-
-        /** claims 파싱 */
-        Jws<Claims> claims = null;
-        try {
-            claims = Jwts.parser()
-                    .setSigningKey(this.generateKey())
-                    .parseClaimsJws(jwt);
-        } catch (Exception e) {
-            throw new UnauthorizedException();
-        }
+        Jws<Claims> claims = parseClaims(jwt);
 
         HashMap<String, Object> value = (LinkedHashMap<String, Object>)claims.getBody().get(key);
         return value;
@@ -68,15 +73,8 @@ public class JwtServiceImpl implements JwtService {
     /**
      * Desc : 토큰 만료 시간 체크, 사용 여부 확인
      */
-    public boolean checkTokenUsable(String token) throws InvalidTokenException {
-        Jws<Claims> claims = null;
-        try {
-            claims = Jwts.parser()
-                    .setSigningKey(this.generateKey())
-                    .parseClaimsJws(token);
-        } catch (Exception e) {
-            throw new InvalidTokenException();
-        }
+    public boolean checkTokenUsable(String token) throws UnauthorizedException {
+        Jws<Claims> claims = parseClaims(token);
 
         long regDate = (long) claims.getHeader().get("regDate");
 
