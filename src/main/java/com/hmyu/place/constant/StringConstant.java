@@ -24,7 +24,7 @@ public class StringConstant {
 	public static final String EXTRA_MESSAGE = "extraMessage";
 	public static final String TXID = "txId";
 	public static final String TIMESTAMP = "timestamp";
-	public static final String OK = "FP-00000";
+	public static final String OK = "0000";
 
 
 }
