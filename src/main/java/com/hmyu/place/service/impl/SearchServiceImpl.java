@@ -24,7 +24,15 @@ public class SearchServiceImpl implements SearchService {
             return resVo;
         }
 
+        // TODO :: 검색 키워드 저장
 
+        // TODO :: 카카오 api
+
+        // TODO :: 네이버 api
+
+        // TODO :: 중복 추리기
+
+        // TODO :: 결과 세팅
 
         return resVo;
     }
@@ -35,6 +43,8 @@ public class SearchServiceImpl implements SearchService {
     @Override
     public ResponseVo getSearchKeyword() {
         ResponseVo resVo = new ResponseVo();
+
+        // TODO :: 키워드 히스토리 조회
 
         return resVo;
     }
