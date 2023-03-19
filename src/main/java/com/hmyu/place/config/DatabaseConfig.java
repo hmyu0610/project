@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 import java.io.IOException;
 
 @Configuration
-@MapperScan(basePackages = {"com.finpong.admin.mapper"})
+@MapperScan(basePackages = {"com.hmyu.place.mapper"})
 public class DatabaseConfig {
 
     @Value("${spring.datasource.driver-class-name}")
