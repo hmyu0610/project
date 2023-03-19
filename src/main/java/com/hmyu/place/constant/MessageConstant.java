@@ -22,6 +22,10 @@ public enum MessageConstant {
     // 요청 권한 오류
     NO_PERMISSION("0001", "사용 권한이 없습니다."),
     INVALID_PERMISSION("0002", "사용권한 정보가 올바르지 않습니다."),
+    EXPIRED_TOKEN("0003", "만료된 토큰입니다."),
+
+    // 토큰
+    INSERT_USER_ERROR("0100", "사용자 정보 저장 중 오류가 발생했습니다."),
 
     // 공통
     INVALID_PARAMETER("1000", "필수 입력 파라미터가 누락되었습니다."),
@@ -32,6 +36,7 @@ public enum MessageConstant {
 
     // 통신 오류
     INTERNAL_HTTP_CONNECT_ERROR("2000", "내부 요청 처리 중 통신 오류가 발생했습니다."),
+
 
     ;
 
