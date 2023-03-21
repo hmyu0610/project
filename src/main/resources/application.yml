@@ -15,6 +15,7 @@ spring:
     hibernate:
       ddl-auto: none
     database: mysql
+
 mybatis:
   config-location: classpath:mybatis-config.xml
 

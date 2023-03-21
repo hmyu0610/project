@@ -16,25 +16,6 @@
 		<logger name="com.hmyu.place" level="debug" additivity="false">
 			<AppenderRef ref="console"/>
 		</logger>
-		<!--  3rdparty Loggers  -->
-		<logger name="org.springframework.core" level="warn" additivity="false">
-			<AppenderRef ref="console"/>
-		</logger>
-		<logger name="org.springframework.beans" level="warn" additivity="false">
-			<AppenderRef ref="console"/>
-		</logger>
-		<logger name="org.springframework.context" level="warn" additivity="false">
-			<AppenderRef ref="console"/>
-		</logger>
-		<logger name="org.springframework.web" level="warn" additivity="false">
-			<AppenderRef ref="console"/>
-		</logger>
-		<logger name="org.springframework.data" level="warn" additivity="false">
-			<AppenderRef ref="console"/>
-		</logger>
-		<logger name="org.springframework.security" level="warn" additivity="false">
-			<AppenderRef ref="console"/>
-		</logger>
 		<root level="debug" additivity="false">
 			<AppenderRef ref="console"/>
 		</root>

@@ -31,13 +31,13 @@ public class TokenCheckAspect {
     public void tokenCheckAspect() throws Throwable {
         logger.debug("[tokenCheckAspect]");
 
-        HttpServletRequest request = ((ServletRequestAttributes)(RequestContextHolder.currentRequestAttributes())).getRequest();
+        HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
 
-        /**	헤더 토큰 추출 및 맵 변환	*/
+        /**    헤더 토큰 추출 및 맵 변환	*/
         String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
-        if(StringUtils.isEmpty(authorization)) {
+        if (StringUtils.isEmpty(authorization)) {
             logger.error("[TokenCheckAspect] empty header");
-            throw new RuntimeException(MessageConstant.NO_PERMISSION.getCode());	// 토큰 없음
+            throw new RuntimeException(MessageConstant.NO_PERMISSION.getCode());    // 토큰 없음
         }
 
         String token = null;
@@ -45,7 +45,7 @@ public class TokenCheckAspect {
             token = request.getHeader(HttpConstant.AUTHORIZATION);
         } catch (Exception e) {
             logger.error("[TokenCheckAspect] get token error");
-            throw new RuntimeException(MessageConstant.NO_PERMISSION.getCode());	// 토큰 없음
+            throw new RuntimeException(MessageConstant.NO_PERMISSION.getCode());    // 토큰 없음
         }
 
         // 토큰 만료일자 확인
