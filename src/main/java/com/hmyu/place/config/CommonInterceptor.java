@@ -3,7 +3,6 @@ package com.hmyu.place.config;
 import com.hmyu.place.constant.CommonProperties;
 import com.hmyu.place.constant.HttpConstant;
 import com.hmyu.place.constant.StringConstant;
-import com.hmyu.place.exception.ExpiredTokenException;
 import com.hmyu.place.exception.UnauthorizedException;
 import com.hmyu.place.service.JwtService;
 import com.hmyu.place.util.EtcUtil;
@@ -15,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
 
 
 /**
@@ -40,20 +38,27 @@ public class CommonInterceptor implements HandlerInterceptor {
         String serverMode = CommonProperties.PROPERTIES_MAP.get(StringConstant.MODE);
         logger.warn("[Interceptor] IP : {}, ServerMode : {}, Request URI : {}", EtcUtil.getClientIp(request), serverMode, requestUri);
 
-        // 토큰 체크하지 않을 uri
-        String[] passUriArr = {"/", "/token", "/error"};
-        if (Arrays.toString(passUriArr).contains(requestUri)) {
-            return true;
-        }
-
         if (StringUtils.isEmpty(token)) {
-            throw new UnauthorizedException();
+            request.setAttribute("exceptionClass", "UnauthorizedException");
+            request.getRequestDispatcher("/error").forward(request, response);
+            return false;
         }
 
         // 토큰 만료일자 확인
-        if (!jwtService.checkTokenUsable(token)) {
+        boolean usable = false;
+        try {
+            usable = jwtService.checkTokenUsable(token);
+        } catch (UnauthorizedException e) {
+            request.setAttribute("exceptionClass", "UnauthorizedException");
+            request.getRequestDispatcher("/error").forward(request, response);
+            return false;
+        }
+
+        if (!usable) {
             logger.error("[TokenCheckAspect] expired token");
-            throw new ExpiredTokenException();
+            request.setAttribute("exceptionClass", "ExpiredTokenException");
+            request.getRequestDispatcher("/error").forward(request, response);
+            return false;
         }
 
         return true;

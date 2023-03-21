@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug">
+	<Properties>
+		<Property name="layoutPattern">%style{[%d{yyyy-MM-dd HH:mm:ss,SSS}]}{cyan} %highlight{[%-5p]}{FATAL=bg_red, ERROR=red, INFO=green, DEBUG=blue}(%F:%L) %style{[%t]}{yellow} %m%n</Property>
+		<Property name="fileLayoutPattern">[%d{yyyy-MM-dd HH:mm:ss.SSS}][%-5p](%F:%L) [%t] - %m%n</Property>
+	</Properties>
+
+	<!-- Appenders -->
+	<Appenders>
+		<Console name="console" target="SYSTEM_OUT">
+			<PatternLayout pattern="${layoutPattern}"/>
+		</Console>
+	</Appenders>
+	<loggers>
+		<!--  Application Loggers  -->
+		<logger name="com.hmyu.place" level="debug" additivity="false">
+			<AppenderRef ref="console"/>
+		</logger>
+		<!--  3rdparty Loggers  -->
+		<logger name="org.springframework.core" level="warn" additivity="false">
+			<AppenderRef ref="console"/>
+		</logger>
+		<logger name="org.springframework.beans" level="warn" additivity="false">
+			<AppenderRef ref="console"/>
+		</logger>
+		<logger name="org.springframework.context" level="warn" additivity="false">
+			<AppenderRef ref="console"/>
+		</logger>
+		<logger name="org.springframework.web" level="warn" additivity="false">
+			<AppenderRef ref="console"/>
+		</logger>
+		<logger name="org.springframework.data" level="warn" additivity="false">
+			<AppenderRef ref="console"/>
+		</logger>
+		<logger name="org.springframework.security" level="warn" additivity="false">
+			<AppenderRef ref="console"/>
+		</logger>
+		<root level="debug" additivity="false">
+			<AppenderRef ref="console"/>
+		</root>
+	</loggers>
+
+</Configuration>

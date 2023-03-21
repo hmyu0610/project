@@ -20,7 +20,7 @@ public class ExceptionControllerAdvice {
 	private static final Logger logger = LoggerFactory.getLogger(ExceptionControllerAdvice.class);
 	
 	@ExceptionHandler(Exception.class)
-	public ResponseVo exceptionHandler(Exception e) throws Exception {
+	public ResponseVo exceptionHandler(Exception e) {
 		logger.error("[ExceptionControllerAdvice] " + e, e);
 		
 		if (StringUtils.containsIgnoreCase(ExceptionUtils.getRootCauseMessage(e), "Broken pipe")

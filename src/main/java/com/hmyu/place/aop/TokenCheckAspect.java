@@ -56,7 +56,7 @@ public class TokenCheckAspect {
 
         HashMap<String, Object> userInfo = null;
         try {
-            userInfo = jwtService.getClaim("userInfo");
+            userInfo = jwtService.getClaim();
         } catch (Exception e) {
             logger.error("[TokenCheckAspect] get userInfo error");
             throw new RuntimeException(MessageConstant.INVALID_PERMISSION.getCode());   // 잘못된 토큰

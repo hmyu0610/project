@@ -17,14 +17,19 @@ public class WebConfig implements WebMvcConfigurer {
         this.jwtService = jwtService;
     }
 
+    // Interceptor에서 제외되는 URL 주소
+    private static final String[] EXCLUDE_PATHS = {
+            "/",
+            "/token",
+            "/error",
+            "/favicon.ico",
+    };
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new CommonInterceptor(jwtService))
                 .addPathPatterns("/**")
-                .excludePathPatterns("/account/confirm-email/*")
-                .excludePathPatterns("/assets/**")
-                .excludePathPatterns("/js/**")
-                .excludePathPatterns("/css/**");
+                .excludePathPatterns(EXCLUDE_PATHS);
     }
 
     @Override
