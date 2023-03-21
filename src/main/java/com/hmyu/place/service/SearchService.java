@@ -6,7 +6,7 @@ public interface SearchService {
     /**
      * Desc : 장소 검색
      */
-    ResponseVo getSearchPlace(String keyword);
+    ResponseVo getSearchPlace(String keyword) throws Exception;
 
     /**
      * Desc : 검색 키워드 목록

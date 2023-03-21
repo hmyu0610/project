@@ -3,4 +3,9 @@
 
 <mapper namespace="com.hmyu.place.mapper.SearchMapper">
 
+    <insert id="insertSearchKeywordHistory" parameterType="map">
+    /** insertSearchKeywordHistory 검색 키워드 저장 */
+        INSERT INTO TB_SEARCH_KEYWORD_HISTORY(USER_UUID, KEYWORD, SEARCH_DATE, SEARCH_TIME, REG_TIME)
+        VALUES (#{userUuid}, #{keyword}, FORMATDATETIME(now(), 'yyyyMMdd'), FORMATDATETIME(now(), 'HHmmss'), now())
+    </insert>
 </mapper>

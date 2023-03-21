@@ -11,11 +11,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class NaverApi {
-    private static final Logger logger = LoggerFactory.getLogger(ApiSender.class);
+    private static final Logger logger = LoggerFactory.getLogger(NaverApi.class);
 
+    public static final String NAVER_DOMAIN = CommonProperties.PROPERTIES_MAP.get(StringConstant.NAVER_DOMAIN);
     public static final String CLIENT_ID_KEY = "X-Naver-Client-Id";
     public static final String CLIENT_SECRET_KEY = "X-Naver-Client-Secret";
-    public static final String NAVER_DOMAIN = CommonProperties.PROPERTIES_MAP.get(StringConstant.NAVER_DOMAIN);
+
     public static final String SEARCH_PLACE_KEYWORD = "/v1/search/local.json";
 
     /**
@@ -42,8 +43,11 @@ public class NaverApi {
         }
 
         String url = NAVER_DOMAIN + uri + paramStr;
-        String resultStr = ApiSender.get(url, getHeaderMap());
-        return new ObjectMapper().readValue(resultStr, JSONObject.class);
+        logger.debug("[NaverApi] get url : {}", url);
+
+        String responseStr = ApiSender.get(url, getHeaderMap());
+        JSONObject response = new ObjectMapper().readValue(responseStr, JSONObject.class);
+        return response;
     }
 
     /**
