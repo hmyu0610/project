@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hmyu.place.AbstractTest;
 import com.hmyu.place.constant.StringConstant;
 import com.hmyu.place.controller.SearchController;
-import com.hmyu.place.vo.search.ReqSearchPlaceVo;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +28,10 @@ public class SearchControllerTest extends AbstractTest {
 
     @Test
     public void searchPlaceBasicTest() throws Exception {
-        ReqSearchPlaceVo vo = getReqSearchPlaceVo();
         mockMvc.perform(
-                post("/search/place")
+                post("/v1/search/place")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .content(om.writeValueAsBytes(vo))
+                .content("스타벅스")
         )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath(StringConstant.RESULT).isNotEmpty())
@@ -42,16 +40,10 @@ public class SearchControllerTest extends AbstractTest {
         ;
     }
 
-    public ReqSearchPlaceVo getReqSearchPlaceVo() {
-        ReqSearchPlaceVo vo = new ReqSearchPlaceVo();
-        vo.setKeyword("keyword");
-        return vo;
-    }
-
     @Test
     public void searchKeywordBasicTest() throws Exception {
         mockMvc.perform(
-                get("/search/place")
+                get("/v1/search/place")
         )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath(StringConstant.RESULT).isNotEmpty())
