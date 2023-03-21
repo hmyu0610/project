@@ -8,4 +8,23 @@
         INSERT INTO TB_SEARCH_KEYWORD_HISTORY(USER_UUID, KEYWORD, SEARCH_DATE, SEARCH_TIME, REG_TIME)
         VALUES (#{userUuid}, #{keyword}, FORMATDATETIME(now(), 'yyyyMMdd'), FORMATDATETIME(now(), 'HHmmss'), now())
     </insert>
+
+    <select id="selectKeywordHistoryList" resultType="ResSearchKeywordVo">
+    /** selectKeywordHistoryList 검색 키워드 목록 조회 */
+        SELECT  DISTINCT
+                origin.KEYWORD  keyword
+        ,       CNT             count
+        ,       USER_CNT        userCount
+        FROM TB_SEARCH_KEYWORD_HISTORY origin,
+        (
+            SELECT REPLACE(KEYWORD, ' ', '') KEYWORD, COUNT(KEYWORD) CNT , COUNT(DISTINCT USER_UUID) USER_CNT, MAX(LENGTH(KEYWORD)) LEN
+            FROM TB_SEARCH_KEYWORD_HISTORY
+            GROUP BY KEYWORD
+            ORDER BY COUNT(KEYWORD) DESC, COUNT(DISTINCT USER_UUID) DESC, KEYWORD
+            LIMIT 10
+        ) search
+        WHERE REPLACE(origin.KEYWORD, ' ', '') = search.KEYWORD
+        AND LENGTH(origin.KEYWORD) = search.LEN
+        ORDER BY CNT DESC, USER_CNT DESC
+    </select>
 </mapper>

@@ -23,7 +23,7 @@ import java.util.LinkedHashMap;
 public class JwtServiceImpl implements JwtService {
     private final Logger logger = LoggerFactory.getLogger(JwtServiceImpl.class);
 
-    public static final int JWT_EXPIRATION_TIME = 60 * 60 * 1000;				// JWT 1시간
+    public static final int JWT_EXPIRATION_TIME = 2 * 60 * 60 * 1000;				// JWT 2시간
 
     /**
      * Desc : 토큰 생성

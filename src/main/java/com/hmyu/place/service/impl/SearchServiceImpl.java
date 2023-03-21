@@ -6,6 +6,7 @@ import com.hmyu.place.service.JwtService;
 import com.hmyu.place.service.SearchService;
 import com.hmyu.place.thirdparty.SearchPlace;
 import com.hmyu.place.vo.ResponseVo;
+import com.hmyu.place.vo.search.ResSearchKeywordVo;
 import com.hmyu.place.vo.search.ResSearchPlaceVo;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -66,7 +67,11 @@ public class SearchServiceImpl implements SearchService {
     public ResponseVo getSearchKeyword() {
         ResponseVo resVo = new ResponseVo();
 
-        // TODO :: 키워드 히스토리 조회
+        List<ResSearchKeywordVo> keywordList = searchMapper.selectKeywordHistoryList();
+        if (keywordList == null || keywordList.isEmpty()) {
+            resVo.setResultMessage(MessageConstant.NOT_EXISTS_DATA);
+        }
+        resVo.setData(keywordList);
 
         return resVo;
     }
