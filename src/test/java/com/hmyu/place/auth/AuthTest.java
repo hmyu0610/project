@@ -51,8 +51,8 @@ public class AuthTest extends AbstractTest {
     @Test
     public void createTokenTest() throws Exception {
         ReqTokenVo vo = new ReqTokenVo();
-        vo.setEmail("hmyu@kakao.com");
-        vo.setName("유혜미");
+        vo.setEmail("test1@test.com");
+        vo.setName("테스트1");
 
         mockMvc.perform(
                 post("/token")

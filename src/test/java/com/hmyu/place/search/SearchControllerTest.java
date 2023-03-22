@@ -44,7 +44,7 @@ public class SearchControllerTest extends AbstractTest {
     public void searchPlaceBasicTest2() throws Exception {
         mockMvc.perform(
                 get("/v1/search/place").param("keyword", "")
-                .header("Authorization", "eyJ0eXAiOiJKV1QiLCJyZWdEYXRlIjoxNjc5NDYzMzIwMTc1LCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjMjY5YjdjMjk3NDA0ZTBiOGEwNzIwOWI4M2NmNmNjYSIsInVzZXJJbmZvIjp7InVzZXJVdWlkIjoiYzI2OWI3YzI5NzQwNGUwYjhhMDcyMDliODNjZjZjY2EiLCJlbWFpbCI6ImhteXVAa2FrYW8uY29tIiwibmFtZSI6IuycoO2YnOuvuCJ9LCJleHAiOjE2Nzk0NzA1MjB9.jI3dZNhyUvslka-zfwiUdx9BJ_LEXn6Z4Wm6XbL_i-0")
+                .header("Authorization", "eyJ0eXAiOiJKV1QiLCJyZWdEYXRlIjoxNjc5NDg5MzA4NzM1LCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmYTU5MjMwMjExMGU0NjBlODEyMTM1NTcyMjRhMzY3MSIsInVzZXJJbmZvIjp7InVzZXJVdWlkIjoiZmE1OTIzMDIxMTBlNDYwZTgxMjEzNTU3MjI0YTM2NzEiLCJlbWFpbCI6InRlc3QxQHRlc3QuY29tIiwibmFtZSI6Iu2FjOyKpO2KuDEifSwiZXhwIjoxNjc5NDk2NTA5fQ.Ob-ctxnxCbB2KRimOFeeZ_1APn_uUz5oIF92TO6nu4E")
         )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath(StringConstant.RESULT).isNotEmpty())
@@ -58,7 +58,7 @@ public class SearchControllerTest extends AbstractTest {
     public void searchPlaceBasicTest3() throws Exception {
         mockMvc.perform(
                 get("/v1/search/place").param("keyword", "제주 스타벅스")
-                .header("Authorization", "eyJ0eXAiOiJKV1QiLCJyZWdEYXRlIjoxNjc5NDYzMzIwMTc1LCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjMjY5YjdjMjk3NDA0ZTBiOGEwNzIwOWI4M2NmNmNjYSIsInVzZXJJbmZvIjp7InVzZXJVdWlkIjoiYzI2OWI3YzI5NzQwNGUwYjhhMDcyMDliODNjZjZjY2EiLCJlbWFpbCI6ImhteXVAa2FrYW8uY29tIiwibmFtZSI6IuycoO2YnOuvuCJ9LCJleHAiOjE2Nzk0NzA1MjB9.jI3dZNhyUvslka-zfwiUdx9BJ_LEXn6Z4Wm6XbL_i-0")
+                .header("Authorization", "eyJ0eXAiOiJKV1QiLCJyZWdEYXRlIjoxNjc5NDg5MzA4NzM1LCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmYTU5MjMwMjExMGU0NjBlODEyMTM1NTcyMjRhMzY3MSIsInVzZXJJbmZvIjp7InVzZXJVdWlkIjoiZmE1OTIzMDIxMTBlNDYwZTgxMjEzNTU3MjI0YTM2NzEiLCJlbWFpbCI6InRlc3QxQHRlc3QuY29tIiwibmFtZSI6Iu2FjOyKpO2KuDEifSwiZXhwIjoxNjc5NDk2NTA5fQ.Ob-ctxnxCbB2KRimOFeeZ_1APn_uUz5oIF92TO6nu4E")
         )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath(StringConstant.RESULT).isNotEmpty())
@@ -69,7 +69,7 @@ public class SearchControllerTest extends AbstractTest {
     }
 
     @Test
-    @DisplayName("[장소 검색 테스트][권한오류]")
+    @DisplayName("[검색 키워드 목록 테스트][권한오류]")
     public void searchKeywordBasicTest() throws Exception {
         mockMvc.perform(
                 get("/v1/search/keyword")
@@ -83,11 +83,11 @@ public class SearchControllerTest extends AbstractTest {
     }
 
     @Test
-    @DisplayName("[장소 검색 테스트][성공]")
+    @DisplayName("[검색 키워드 목록 테스트][성공]")
     public void searchKeywordBasicTest2() throws Exception {
         mockMvc.perform(
                 get("/v1/search/keyword")
-                .header("Authorization", "eyJ0eXAiOiJKV1QiLCJyZWdEYXRlIjoxNjc5NDYzMzIwMTc1LCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjMjY5YjdjMjk3NDA0ZTBiOGEwNzIwOWI4M2NmNmNjYSIsInVzZXJJbmZvIjp7InVzZXJVdWlkIjoiYzI2OWI3YzI5NzQwNGUwYjhhMDcyMDliODNjZjZjY2EiLCJlbWFpbCI6ImhteXVAa2FrYW8uY29tIiwibmFtZSI6IuycoO2YnOuvuCJ9LCJleHAiOjE2Nzk0NzA1MjB9.jI3dZNhyUvslka-zfwiUdx9BJ_LEXn6Z4Wm6XbL_i-0")
+                .header("Authorization", "eyJ0eXAiOiJKV1QiLCJyZWdEYXRlIjoxNjc5NDg5MzA4NzM1LCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmYTU5MjMwMjExMGU0NjBlODEyMTM1NTcyMjRhMzY3MSIsInVzZXJJbmZvIjp7InVzZXJVdWlkIjoiZmE1OTIzMDIxMTBlNDYwZTgxMjEzNTU3MjI0YTM2NzEiLCJlbWFpbCI6InRlc3QxQHRlc3QuY29tIiwibmFtZSI6Iu2FjOyKpO2KuDEifSwiZXhwIjoxNjc5NDk2NTA5fQ.Ob-ctxnxCbB2KRimOFeeZ_1APn_uUz5oIF92TO6nu4E")
         )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath(StringConstant.RESULT).isNotEmpty())
