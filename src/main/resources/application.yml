@@ -1,0 +1,52 @@
+server:
+  port: 9000
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  profiles:
+    group:
+      "local" : "localDb"
+  mvc:
+    throw-exception-if-no-handler-found: true
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  web:
+    resources:
+      add-mappings: false
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    database: mysql
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "localDb"
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+      path: /h2-console
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:h2/schema.sql
+      data-locations: classpath:h2/data.sql
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:~/test;mode=mysql;AUTO_SERVER=true
+    username: sa
+    password:
+logging:
+  level:
+    org:
+      springframework:
+        boot:
+          autoconfigure: ERROR
