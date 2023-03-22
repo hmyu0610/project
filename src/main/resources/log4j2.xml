@@ -11,14 +11,5 @@
 			<PatternLayout pattern="${layoutPattern}"/>
 		</Console>
 	</Appenders>
-	<loggers>
-		<!--  Application Loggers  -->
-		<logger name="com.hmyu.place" level="debug" additivity="false">
-			<AppenderRef ref="console"/>
-		</logger>
-		<root level="debug" additivity="false">
-			<AppenderRef ref="console"/>
-		</root>
-	</loggers>
 
 </Configuration>

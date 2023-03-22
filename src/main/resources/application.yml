@@ -1,5 +1,7 @@
 server:
-  port: 8080
+  port: 9000
+  tomcat:
+    uri-encoding: UTF-8
 
 spring:
   profiles:
@@ -39,7 +41,7 @@ spring:
       data-locations: classpath:h2/data.sql
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:~/test;mode=mysql
+    url: jdbc:h2:~/test;mode=mysql;AUTO_SERVER=true
     username: sa
     password:
 logging:

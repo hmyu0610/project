@@ -2,6 +2,9 @@ package com.hmyu.place.aop;
 
 import com.hmyu.place.constant.HttpConstant;
 import com.hmyu.place.constant.MessageConstant;
+import com.hmyu.place.exception.ExpiredTokenException;
+import com.hmyu.place.exception.InvalidTokenException;
+import com.hmyu.place.exception.UnauthorizedException;
 import com.hmyu.place.mapper.UserMapper;
 import com.hmyu.place.service.JwtService;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +40,7 @@ public class TokenCheckAspect {
         String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (StringUtils.isEmpty(authorization)) {
             logger.error("[TokenCheckAspect] empty header");
-            throw new RuntimeException(MessageConstant.NO_PERMISSION.getCode());    // 토큰 없음
+            throw new UnauthorizedException();    // 토큰 없음
         }
 
         String token = null;
@@ -45,13 +48,13 @@ public class TokenCheckAspect {
             token = request.getHeader(HttpConstant.AUTHORIZATION);
         } catch (Exception e) {
             logger.error("[TokenCheckAspect] get token error");
-            throw new RuntimeException(MessageConstant.NO_PERMISSION.getCode());    // 토큰 없음
+            throw new UnauthorizedException();    // 토큰 없음
         }
 
         // 토큰 만료일자 확인
         if (!jwtService.checkTokenUsable(token)) {
             logger.error("[TokenCheckAspect] expired token");
-            throw new RuntimeException(MessageConstant.EXPIRED_TOKEN.getCode());     // 만료 토큰
+            throw new ExpiredTokenException();     // 만료 토큰
         }
 
         HashMap<String, Object> userInfo = null;
@@ -59,14 +62,14 @@ public class TokenCheckAspect {
             userInfo = jwtService.getClaim();
         } catch (Exception e) {
             logger.error("[TokenCheckAspect] get userInfo error");
-            throw new RuntimeException(MessageConstant.INVALID_PERMISSION.getCode());   // 잘못된 토큰
+            throw new InvalidTokenException();   // 잘못된 토큰
         }
 
         String userUuid = userInfo.get("userUuid").toString();
         String email = userInfo.get("email").toString();
         if (!userUuid.equals(userMapper.selectUserUuidByEmail(email))) {
             logger.error("[TokenCheckAspect] invalid userInfo error");
-            throw new RuntimeException(MessageConstant.INVALID_PERMISSION.getCode());   // 잘못된 토큰
+            throw new InvalidTokenException();   // 잘못된 토큰
         }
     }
 }
