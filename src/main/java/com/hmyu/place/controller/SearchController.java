@@ -28,7 +28,7 @@ public class SearchController {
     /**
      * Desc : 장소 검색
      */
-    @ApiOperation(value = "[장소 검색]", notes = "키워드로 장소 검색을 요청한다.", httpMethod = "GET", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE, tags = {"검색"})
+    @ApiOperation(value = "[장소 검색]", notes = "키워드로 장소 검색을 요청한다.", httpMethod = "GET", tags = {"검색"})
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "success" , response = ResSearchPlaceVo.class, responseContainer = "List")
     })
@@ -42,7 +42,7 @@ public class SearchController {
     /**
      * Desc : 검색 키워드 목록
      */
-    @ApiOperation(value = "[검색 키워드 목록]", notes = "검색 키워드 목록 조회를 요청한다.", httpMethod = "GET", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE, tags = {"검색"})
+    @ApiOperation(value = "[검색 키워드 목록]", notes = "검색 키워드 목록 조회를 요청한다.", httpMethod = "GET", tags = {"검색"})
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "success" , response = ResSearchKeywordVo.class, responseContainer = "List")
     })

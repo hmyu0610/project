@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +29,7 @@ public class SearchServiceImpl implements SearchService {
     /**
      * Desc : 장소 검색
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public ResponseVo getSearchPlace(String keyword) throws Exception {
         ResponseVo resVo = new ResponseVo();
@@ -63,6 +65,7 @@ public class SearchServiceImpl implements SearchService {
     /**
      * Desc : 검색 키워드 목록
      */
+    @Transactional(readOnly = true)
     @Override
     public ResponseVo getSearchKeyword() {
         ResponseVo resVo = new ResponseVo();

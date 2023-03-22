@@ -3,11 +3,13 @@ package com.hmyu.place.thirdparty;
 import com.hmyu.place.AbstractTest;
 import org.json.simple.JSONObject;
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
 
 import java.util.HashMap;
 
 public class ThirdPartyTest extends AbstractTest {
 
+    @DisplayName("[kakao api 테스트]")
     @Test
     public void kakaoApiTest() throws Exception {
         HashMap<String, Object> paramMap = new HashMap<>();
@@ -24,6 +26,7 @@ public class ThirdPartyTest extends AbstractTest {
         System.out.println(result);
     }
 
+    @DisplayName("[naver api 테스트]")
     @Test
     public void naverApiTest() throws Exception {
         HashMap<String, Object> paramMap = new HashMap<>();
